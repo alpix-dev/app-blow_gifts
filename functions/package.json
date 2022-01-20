@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ecomplus/application-sdk": "^22.0.0-firestore.1.15.6",
+    "@firebase/app-compat": "^0.1.14",
     "express": "^4.17.2",
     "firebase-admin": "^10.0.1",
     "firebase-functions": "^3.16.0"
