@@ -518,6 +518,7 @@ const app = {
       },
       hide: false
     }
+  }
 }
 
 /**
