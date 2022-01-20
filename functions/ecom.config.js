@@ -7,8 +7,8 @@
 
 const app = {
   app_id: 120452,
-  title: 'My Awesome E-Com Plus App',
-  slug: 'my-awesome-app',
+  title: 'BlowGummies - Brindes',
+  slug: 'bg-gifts',
   type: 'external',
   state: 'active',
   authentication: true,
