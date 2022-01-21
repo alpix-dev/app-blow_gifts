@@ -211,7 +211,14 @@ const app = {
                 pattern: "^[a-f0-9]{24}$",
                 title: "ID do produto"
               }
-            }
+            },
+            selectable: {
+              type: "integer",
+              minimum: 0,
+              maximum: 999999999,
+              title: "Quantidade de brindes",
+              description: "Informe a quantidade de brindes que podem ser resgatados para essa promoção"
+            },
           }
         }
       },    
