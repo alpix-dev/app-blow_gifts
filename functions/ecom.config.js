@@ -138,6 +138,82 @@ const app = {
   },
 
   admin_settings: {
+    schema: {
+      title: "Brindes",
+      description: "Adicionar produtos a preço zero com filtro por subtotal",
+      type: "array",
+      items: {
+        type: "object",
+        title: "Regra para disponibilizar brindes",
+        required: [
+          "product_ids"
+        ],
+        additionalProperties: false,
+        properties: {
+          label: {
+            type: "string",
+            maxLength: 100,
+            title: "Rótulo",
+            description: "Título (opcional) da promoção"
+          },
+          date_range: {
+            type: "object",
+            title: "Período de validade",
+            description: "Preencha para programar a oferta a datas de início e/ou fim",
+            additionalProperties: false,
+            properties: {
+              start: {
+                type: "string",
+                format: "date-time",
+                title: "Início"
+              },
+              end: {
+                type: "string",
+                format: "date-time",
+                title: "Encerramento"
+              }
+            }
+          },
+          product_ids: {
+            title: "Produto(s) brinde",
+            description: "Lista de produtos fornecidos como prêmio",
+            type: "array",
+            items: {
+              type: "string",
+              pattern: "^[a-f0-9]{24}$",
+              title: "ID do produto"
+            }
+          },
+          min_subtotal: {
+            type: "integer",
+            minimum: 0,
+            maximum: 999999999,
+            title: "Valor mínimo",
+            description: "Subtotal mínimo para disponibilizar o brinde"
+          },
+          customer_ids: {
+            title: "Lista de clientes selecionados",
+            description: "Se preenchido, os brindes serão disponibilizados apenas para estes clientes",
+            type: "array",
+            items: {
+              type: "string",
+              pattern: "^[a-f0-9]{24}$",
+              title: "ID do cliente"
+            }
+          },
+          check_product_ids: {
+            title: "Lista de produtos da campanha",
+            description: "Se preenchido, o brinde só será aplicado se um dos produtos estiver no carrinho",
+            type: "array",
+            items: {
+              type: "string",
+              pattern: "^[a-f0-9]{24}$",
+              title: "ID do produto"
+            }
+          }
+        }
+      }
+    }    
   }
 }
 
