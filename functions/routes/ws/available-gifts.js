@@ -72,30 +72,6 @@ exports.post = ({ appSdk, admin }, req, res) => {
       }
 
       if (params.items && params.items.length) {
-        // try product kit discounts first
-        if (Array.isArray(config.product_kit_discounts)) {
-          config.product_kit_discounts = config.product_kit_discounts.map(kitDiscount => {
-            if (!kitDiscount.product_ids) {
-              // kit with any items
-              kitDiscount.product_ids = []
-            }
-            return kitDiscount
-          })
-        }
-        const kitDiscounts = getValidDiscountRules(config.product_kit_discounts, params, params.items)
-          .sort((a, b) => {
-            if (a.min_quantity > b.min_quantity) {
-              return -1
-            } else if (b.min_quantity > a.min_quantity) {
-              return 1
-            } else if (a.discount.min_amount > b.discount.min_amount) {
-              return -1
-            } else if (b.discount.min_amount > a.discount.min_amount) {
-              return 1
-            }
-            return 0
-          })
-        
         // gift products (freebies) campaings
         if (Array.isArray(config.freebies_rules)) {
           const validFreebiesRules = config.freebies_rules.filter(rule => {
@@ -106,6 +82,8 @@ exports.post = ({ appSdk, admin }, req, res) => {
               rule.product_ids.length
           })
           if (validFreebiesRules) {
+            console.log('validFreebies 1')
+            console.log(JSON.stringify(params.items))
             let subtotal = 0
             params.items.forEach(item => {
               subtotal += (item.quantity * ecomUtils.price(item))
